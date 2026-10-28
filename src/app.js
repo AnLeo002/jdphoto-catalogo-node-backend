@@ -1,0 +1,26 @@
+import express from "express"
+import cors from "cors";
+import dotenv from "dotenv";
+import categoryRouter from "./category/routes/cate.routes.js";
+
+dotenv.config();
+
+const app = express();
+
+app.use(express.json());
+
+app.use(cors());
+
+app.get("/",(req,res)=>{
+  res.json({
+    mensaje:"API funcionando correctamente"
+  });
+});
+
+app.use("/categoria",categoryRouter);
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, ()=>{
+  console.log("Servidor ejecutandose en http://localhost:"+PORT);
+})
